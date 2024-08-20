@@ -1,0 +1,15 @@
+google-cloud-aiplatform==1.62.0
+google-cloud-discoveryengine==0.11.14
+google-cloud-secret-manager
+langchain==0.2.14
+langchain-community==0.2.12
+langchain-core==0.2.33
+langchain-google-community==1.0.7
+langchain-google-vertexai==1.0.8
+langchain-text-splitters==0.2.2
+langchain-google-community[vertexaisearch]
+unstructured[all-docs]
+openpyxl
+nltk
+langfuse
+gradio

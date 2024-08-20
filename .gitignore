@@ -1,0 +1,22 @@
+.venv/
+venv/
+secrets.toml
+*/__pycache__/
+__pycache__/
+.DS_Store
+.chroma
+gcsfuse
+
+#temp file
+page*.jpg
+output.txt
+uploaded_file.pdf
+uploaded_file.txt
+ีuploaded_file.csv
+uploaded_file.*
+*.mp3
+*.webm
+tmp_image
+tmp_image.jpg
+*.mp4
+*.xlsx
