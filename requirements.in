@@ -8,7 +8,7 @@ langchain-google-community==1.0.7
 langchain-google-vertexai==1.0.8
 langchain-text-splitters==0.2.2
 langchain-google-community[vertexaisearch]
-unstructured[all-docs]
+unstructured[xlsx]
 openpyxl
 nltk
 langfuse

@@ -32,13 +32,13 @@ SEARCH_APP_ID=os.environ.get('SEARCH_APP_ID', 'set_taxonomy_app')
 
 # Initialize Langfuse handler
 from langfuse.decorators import observe, langfuse_context
-from langfuse.callback import CallbackHandler
+#from langfuse.callback import CallbackHandler
 
-langfuse_handler = CallbackHandler(
-    secret_key=os.environ["LANGFUSE_SECRET_KEY"],
-    public_key=os.environ["LANGFUSE_PUBLIC_KEY"],
-    host=os.environ["LANGFUSE_HOST"],
-)
+#langfuse_handler = CallbackHandler(
+#    secret_key=os.environ()"LANGFUSE_SECRET_KEY", ""],
+#    public_key=os.environ["LANGFUSE_PUBLIC_KEY"], "",
+#    host=os.environ["LANGFUSE_HOST"],
+#)
 
 # Vertex AI Init
 vertexai.init(project=PROJECT_ID, location=LOCATION)
@@ -603,4 +603,4 @@ if __name__ == "__main__":
             outputs=[output_df],
         )
     
-    app.launch(server_name="0.0.0.0", server_port=8080)
+    app.launch(server_name="0.0.0.0", server_port=8080, debug=True if os.environ.get("DEBUG") == "True" else False)
