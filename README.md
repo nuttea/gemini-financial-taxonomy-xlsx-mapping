@@ -1,53 +1,58 @@
-# New Project Template
+# Gemini 1.5 Financial Taxonomy mapping from XLSX files
 
-This repository contains a template that can be used to seed a repository for a
-new Google open source project.
+Sample project for Financial tables extraction using Gemini API LLM and do the taxonomy mapping with Taxonomy data stored in Vertex AI Search for semantic search and use LLM to map to taxonomy code.
 
-See [go/releasing](http://go/releasing) (available externally at
-https://opensource.google/documentation/reference/releasing) for more information about
-releasing a new Google open source project.
+## Local Development
 
-This template uses the Apache license, as is Google's default.  See the
-documentation for instructions on using alternate license.
+### Pre-requiresites
 
-## How to use this template
+- Python 3.10
+- Python venv and pip-tools
+- Git
+- Vertex AI Search Datastore have been loaded with Taxonomy table
+- Set Environment Variables per your environment
+  - PROJECT_ID (your project id)
+  - LOCATION (default = us-central1)
+  - REGION (default = us-central1-b)
+  - DATA_STORE_LOCATION (default = global)
+  - MAX_DOCUMENTS (default = 5)
+  - ENGINE_DATA_TYPE (default = 1 (structured mode))
+  - SEARCH_ENGINE_ID (your search engine id)
+  - DATA_STORE_ID (your data store id)
+  - SEARCH_APP_ID (your search app id)
 
-1. Clone it from GitHub.
-    * There is no reason to fork it.
-1. Create a new local repository and copy the files from this repo into it.
-1. Modify README.md and docs/contributing.md to represent your project, not the
-   template project.
-1. Develop your new project!
+### Steps
 
-``` shell
-git clone https://github.com/google/new-project
-mkdir my-new-thing
-cd my-new-thing
-git init
-cp -r ../new-project/* ../new-project/.github .
-git add *
-git commit -a -m 'Boilerplate for new Google open source project'
+Create a new python venv and install dependencies
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-## Source Code Headers
+Authentication Google Cloud Services, so app can use your local credentials to access Google Cloud Services
 
-Every file containing source code must include copyright and license
-information. This includes any JS/CSS files that you might be serving out to
-browsers. (This is to help well-intentioned people avoid accidental copying that
-doesn't comply with the license.)
+```bash
+gcloud auth application-default login
+```
 
-Apache header:
+Run Gradio app locally
 
-    Copyright 2024 Google LLC
+```bash
+python ./app/main.py
+```
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+## Deploy to Cloud Run
 
-        https://www.apache.org/licenses/LICENSE-2.0
+From root git directory, you can use gcloud cli to deploy to Cloud Run.
+Below is example command that will tell Cloud Run to build from source and deploy to Cloud Run Instance.
+You can customize other parameters of Cloud Run as needed.
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Reference https://cloud.google.com/run/docs/deploying-source-code
+
+```bash
+CLOUD_RUN_INSTANCE_NAME=genai-finstmt
+gcloud run deploy $CLOUD_RUN_INSTANCE_NAME \
+    --source .
+```
